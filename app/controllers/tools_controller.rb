@@ -4,6 +4,7 @@ class ToolsController < ApplicationController
   allow_unauthenticated_access
 
   def index
+    @categories = Tool.pluck(:category).uniq.compact.sort
     @tools = Tool.order(github_stars: :desc, name: :asc)
 
     if params[:favorites].present? && authenticated?
