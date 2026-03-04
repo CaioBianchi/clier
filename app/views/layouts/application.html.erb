@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "CLIer" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="CLIer">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <% if Rails.env.production? %>
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYG8DC4Z3Z"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DYG8DC4Z3Z');
+      </script>
+
+      <!-- Sentry APM -->
+      <script
+        src="https://browser.sentry-cdn.com/7.100.0/bundle.tracing.min.js"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        Sentry.init({
+          dsn: "https://a25299c8177611f18ebdf2d683dbb9f6@o0.ingest.sentry.io/0",
+          integrations: [new Sentry.BrowserTracing()],
+          tracesSampleRate: 1.0,
+        });
+      </script>
+    <% end %>
+  </head>
+
+  <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex flex-col min-h-screen">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 fixed w-full top-0 z-50 transition-colors">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <%= link_to root_path, class: "text-2xl font-bold text-gray-900 dark:text-white" do %>
+                💻 CLIer
+              <% end %>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <% if authenticated? %>
+              <span class="text-sm text-gray-700 dark:text-gray-300 hidden sm:inline-block"><%= Current.user.email_address %></span>
+              <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                <%= Current.user.favorites.count %> Favorites
+              </span>
+              <%= button_to "Sign out", session_path, method: :delete, class: "text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors" %>
+            <% else %>
+              <%= link_to "Sign in", new_session_path, class: "text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors" %>
+              <%= link_to "Sign up", new_registration_path, class: "inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto mt-28 px-5 flex pb-12 flex-grow">
+      <%= yield %>
+    </main>
+
+    <%= turbo_frame_tag "modal" %>
+
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 mt-auto">
+      <div class="container mx-auto px-5 text-center text-gray-500 dark:text-gray-400 text-sm">
+        Made with ❤️ by <%= link_to "Caio Bianchi", "https://github.com/CaioBianchi", target: "_blank", class: "font-medium text-blue-600 dark:text-blue-400 hover:underline" %>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<div class="w-full">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+    <div>
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white transition-colors">Popular CLI Tools</h1>
+      <p class="text-gray-500 dark:text-gray-400 mt-2 transition-colors">Discover and download the best terminal apps</p>
+    </div>
+    
+    <div class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-3">
+      <% if params[:category].present? %>
+        <%= link_to tools_path(query: params[:query]), class: "inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group h-[38px] whitespace-nowrap", data: { turbo_action: "advance" } do %>
+          <span class="mr-1">Category:</span>
+          <span class="font-semibold text-blue-600 dark:text-blue-400 mr-2"><%= params[:category] %></span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <% end %>
+      <% end %>
+      
+      <%= form_with url: tools_path, method: :get, class: "relative w-full sm:w-72", data: { turbo_frame: "tools_list", turbo_action: "advance" } do |f| %>
+        <% if params[:category].present? %>
+          <%= f.hidden_field :category, value: params[:category] %>
+        <% end %>
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <%= f.text_field :query, value: params[:query], placeholder: "Search tools...", class: "block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors", oninput: "this.form.requestSubmit()" %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "tools_list" do %>
+    <div id="tools_grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <%= render partial: "tool", collection: @tools %>
+    </div>
+
+    <% unless @tools.last_page? %>
+      <%= turbo_frame_tag "tools_pagination", src: tools_path(page: @tools.next_page, query: params[:query], category: params[:category], format: :turbo_stream), loading: :lazy do %>
+        <div class="flex justify-center py-8 w-full">
+          <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
