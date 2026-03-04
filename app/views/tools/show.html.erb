@@ -42,7 +42,7 @@
                 <h4 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">README</h4>
                 <div class="bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-6 overflow-hidden">
                   <div class="prose prose-sm sm:prose-base dark:prose-invert max-w-none overflow-x-auto">
-                    <%= raw @readme_html %>
+                    <%= sanitize @readme_html, tags: %w(h1 h2 h3 h4 h5 h6 p b i em strong a pre code blockquote ul ol li img div span hr), attributes: %w(href src alt class id style) %>
                   </div>
                 </div>
               <% else %>

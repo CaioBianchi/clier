@@ -1480,7 +1480,7 @@ tools = [
     website_url: "https://github.com/expo/expo",
     github_url: "https://github.com/expo/expo",
     image_url: nil
-  },
+  }
 ]
 
 
