@@ -29,14 +29,21 @@ class ToolsController < ApplicationController
   end
 
   def show
-    @tool = Tool.find(params[:id])
-    @readme_html = @tool.readme_html
+    @tool = Tool.find_by!(slug: params[:id])
 
-    # Fallback to fetch live if it's missing (before the job runs)
-    if @readme_html.blank?
-      @readme_html = fetch_readme_html(@tool)
-      # Optionally save it so subsequent clicks are fast
-      @tool.update(readme_html: @readme_html) if @readme_html.present?
+    if turbo_frame_request?
+      @readme_html = @tool.readme_html
+
+      # Fallback to fetch live if it's missing (before the job runs)
+      if @readme_html.blank?
+        @readme_html = fetch_readme_html(@tool)
+        # Optionally save it so subsequent clicks are fast
+        @tool.update(readme_html: @readme_html) if @readme_html.present?
+      end
+    else
+      # For direct visits, render the index with the modal open
+      index
+      render :index
     end
   end
 

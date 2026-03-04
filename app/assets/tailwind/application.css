@@ -1,2 +1,167 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* GitHub-inspired README styling for the .prose class */
+.prose {
+  --tw-prose-body: var(--color-slate-700);
+  --tw-prose-headings: var(--color-slate-900);
+  --tw-prose-links: var(--color-blue-600);
+  --tw-prose-code: var(--color-pink-600);
+  --tw-prose-pre-bg: var(--color-slate-50);
+  --tw-prose-pre-code: var(--color-slate-900);
+  --tw-prose-quotes: var(--color-slate-600);
+  --tw-prose-hr: var(--color-slate-200);
+
+  & :is(h1, h2) {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--color-slate-200);
+    margin-bottom: 16px;
+  }
+
+  & h1 { font-size: 2em; }
+  & h2 { font-size: 1.5em; margin-top: 24px; }
+  & h3 { font-size: 1.25em; }
+
+  & blockquote {
+    padding: 0 1em;
+    border-left: 0.25em solid var(--color-slate-200);
+    color: var(--color-slate-500);
+  }
+
+  & :is(code):not(pre code) {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: var(--color-slate-100);
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  & pre {
+    background-color: var(--color-slate-50);
+    border: 1px solid var(--color-slate-200);
+    border-radius: 6px;
+    padding: 16px;
+    line-height: 1.45;
+  }
+
+  & table {
+    display: block;
+    width: 100%;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  & tr {
+    background-color: white;
+    border-top: 1px solid var(--color-slate-200);
+  }
+
+  & tr:nth-child(2n) {
+    background-color: var(--color-slate-50);
+  }
+
+  & :is(th, td) {
+    padding: 6px 13px;
+    border: 1px solid var(--color-slate-200);
+  }
+
+  & th {
+    font-weight: 600;
+  }
+
+  & img {
+    background-color: white;
+    max-width: 100%;
+    box-sizing: content-box;
+  }
+
+  /* Dark mode overrides */
+  @media (prefers-color-scheme: dark) {
+    --tw-prose-body: var(--color-slate-300);
+    --tw-prose-headings: var(--color-white);
+    --tw-prose-links: var(--color-blue-400);
+    --tw-prose-code: var(--color-pink-400);
+    --tw-prose-pre-bg: var(--color-slate-900);
+    --tw-prose-pre-code: var(--color-slate-200);
+    --tw-prose-quotes: var(--color-slate-400);
+    --tw-prose-hr: var(--color-slate-700);
+
+    & :is(h1, h2) {
+      border-bottom-color: var(--color-slate-700);
+    }
+
+    & blockquote {
+      border-left-color: var(--color-slate-700);
+    }
+
+    & :is(code):not(pre code) {
+      background-color: var(--color-slate-800);
+    }
+
+    & pre {
+      background-color: var(--color-slate-900);
+      border-color: var(--color-slate-700);
+    }
+
+    & tr {
+      background-color: var(--color-slate-800);
+      border-top-color: var(--color-slate-700);
+    }
+
+    & tr:nth-child(2n) {
+      background-color: var(--color-slate-900);
+    }
+
+    & :is(th, td) {
+      border-color: var(--color-slate-700);
+    }
+  }
+}
+
+/* Explicit class-based dark mode (if system uses .dark class) */
+.dark .prose {
+  --tw-prose-body: var(--color-slate-300);
+  --tw-prose-headings: var(--color-white);
+  --tw-prose-links: var(--color-blue-400);
+  --tw-prose-code: var(--color-pink-400);
+  --tw-prose-pre-bg: var(--color-slate-900);
+  --tw-prose-pre-code: var(--color-slate-200);
+  --tw-prose-quotes: var(--color-slate-400);
+  --tw-prose-hr: var(--color-slate-700);
+
+  & :is(h1, h2) {
+    border-bottom-color: var(--color-slate-700);
+  }
+
+  & blockquote {
+    border-left-color: var(--color-slate-700);
+  }
+
+  & :is(code):not(pre code) {
+    background-color: var(--color-slate-800);
+  }
+
+  & pre {
+    background-color: var(--color-slate-900);
+    border-color: var(--color-slate-700);
+  }
+
+  & tr {
+    background-color: var(--color-slate-800);
+    border-top-color: var(--color-slate-700);
+  }
+
+  & tr:nth-child(2n) {
+    background-color: var(--color-slate-900);
+  }
+
+  & :is(th, td) {
+    border-color: var(--color-slate-700);
+  }
+}

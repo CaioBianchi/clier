@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_04_040008) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_04_051331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,9 +42,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_040008) do
     t.string "image_url"
     t.string "name"
     t.text "readme_html"
+    t.string "slug"
     t.string "stable_version"
     t.datetime "updated_at", null: false
     t.string "website_url"
+    t.index ["slug"], name: "index_tools_on_slug"
   end
 
   create_table "users", force: :cascade do |t|
