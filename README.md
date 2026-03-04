@@ -1,7 +1,7 @@
 # 💻 CLIer
 
 [![CI Status](https://github.com/CaioBianchi/clier/actions/workflows/ci.yml/badge.svg)](https://github.com/CaioBianchi/clier/actions/workflows/ci.yml)
-[![Ruby Version](https://img.shields.io/badge/Ruby-3.2+-red.svg)](https://www.ruby-lang.org/)
+[![Ruby Version](https://img.shields.io/badge/Ruby-4.0+-red.svg)](https://www.ruby-lang.org/)
 [![Rails Version](https://img.shields.io/badge/Rails-8.1+-CC0000.svg)](https://rubyonrails.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -29,7 +29,7 @@ CLIer is a curated, elegant directory of the most popular and powerful Command L
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Ruby 3.2+
+- Ruby 4.0+
 - PostgreSQL
 - GitHub CLI (`gh`) - *Optional, but recommended for API rate limits*
 
