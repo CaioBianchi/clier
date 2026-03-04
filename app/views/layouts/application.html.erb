@@ -61,7 +61,7 @@
           <div class="flex items-center space-x-4">
             <% if authenticated? %>
               <span class="text-sm text-gray-700 dark:text-gray-300 hidden sm:inline-block"><%= Current.user.email_address %></span>
-              <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+              <span id="favorites_count" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
                 <%= Current.user.favorites.count %> Favorites
               </span>
               <%= button_to "Sign out", session_path, method: :delete, class: "text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors" %>
