@@ -1,7 +1,7 @@
 Tool.destroy_all
 
 tools = [
-  { 
+  {
     name: "Neovim",
     description: "Vim-fork focused on extensibility and usability",
     category: "Editor",
@@ -12,7 +12,7 @@ tools = [
     github_stars: 96907,
     image_url: nil
   },
-  { 
+  {
     name: "fzf",
     description: "A command-line fuzzy finder",
     category: "TUI / Utility",
@@ -23,7 +23,7 @@ tools = [
     github_stars: 78249,
     image_url: nil
   },
-  { 
+  {
     name: "ripgrep",
     description: "recursively searches directories for a regex pattern",
     category: "Search Tool",
@@ -34,7 +34,7 @@ tools = [
     github_stars: 60473,
     image_url: nil
   },
-  { 
+  {
     name: "lazygit",
     description: "Simple terminal UI for git commands",
     category: "TUI / Git",
@@ -45,7 +45,7 @@ tools = [
     github_stars: 73406,
     image_url: nil
   },
-  { 
+  {
     name: "bat",
     description: "A cat(1) clone with wings.",
     category: "Utility",
@@ -56,7 +56,7 @@ tools = [
     github_stars: 57466,
     image_url: nil
   },
-  { 
+  {
     name: "tmux",
     description: "tmux is a terminal multiplexer",
     category: "Terminal Multiplexer",
@@ -67,7 +67,7 @@ tools = [
     github_stars: 42470,
     image_url: nil
   },
-  { 
+  {
     name: "jq",
     description: "Command-line JSON processor",
     category: "Utility",
@@ -78,7 +78,7 @@ tools = [
     github_stars: 33729,
     image_url: nil
   },
-  { 
+  {
     name: "htop",
     description: "An interactive process viewer",
     category: "TUI / System",
@@ -89,7 +89,7 @@ tools = [
     github_stars: 7870,
     image_url: nil
   },
-  { 
+  {
     name: "eza",
     description: "A modern, maintained replacement for ls",
     category: "Utility",
@@ -100,7 +100,7 @@ tools = [
     github_stars: 20305,
     image_url: nil
   },
-  { 
+  {
     name: "zoxide",
     description: "A smarter cd command. Supports all major shells.",
     category: "Utility",
@@ -111,7 +111,7 @@ tools = [
     github_stars: 33927,
     image_url: nil
   },
-  { 
+  {
     name: "starship",
     description: "The minimal, blazing-fast, and infinitely customizable prompt for any shell!",
     category: "Prompt",
@@ -122,7 +122,7 @@ tools = [
     github_stars: 54475,
     image_url: nil
   },
-  { 
+  {
     name: "fd",
     description: "A simple, fast and user-friendly alternative to 'find'",
     category: "Search Tool",
@@ -133,7 +133,7 @@ tools = [
     github_stars: 41867,
     image_url: nil
   },
-  { 
+  {
     name: "delta",
     description: "A viewer for git and diff output",
     category: "Git / Utility",
@@ -144,7 +144,7 @@ tools = [
     github_stars: 29285,
     image_url: nil
   },
-  { 
+  {
     name: "zellij",
     description: "A terminal workspace with batteries included",
     category: "Terminal Multiplexer",
@@ -155,7 +155,7 @@ tools = [
     github_stars: 29593,
     image_url: nil
   },
-  { 
+  {
     name: "k9s",
     description: "Kubernetes CLI To Manage Your Clusters In Style",
     category: "TUI / Kubernetes",
@@ -166,7 +166,7 @@ tools = [
     github_stars: 32958,
     image_url: nil
   },
-  { 
+  {
     name: "bottom",
     description: "Yet another cross-platform graphical process/system monitor.",
     category: "TUI / System",
@@ -177,7 +177,7 @@ tools = [
     github_stars: 12966,
     image_url: nil
   },
-  { 
+  {
     name: "dust",
     description: "A more intuitive version of du in rust",
     category: "Utility",
@@ -188,7 +188,7 @@ tools = [
     github_stars: 11336,
     image_url: nil
   },
-  { 
+  {
     name: "duf",
     description: "Disk Usage/Free Utility - a better 'df' alternative",
     category: "Utility",
@@ -199,7 +199,7 @@ tools = [
     github_stars: 14843,
     image_url: nil
   },
-  { 
+  {
     name: "broot",
     description: "A new way to see and navigate directory trees",
     category: "Utility",
@@ -210,7 +210,7 @@ tools = [
     github_stars: 12454,
     image_url: nil
   },
-  { 
+  {
     name: "yq",
     description: "jq wrapper for YAML, XML, TOML documents",
     category: "Utility",
@@ -221,7 +221,7 @@ tools = [
     github_stars: 2914,
     image_url: nil
   },
-  { 
+  {
     name: "httpie",
     description: "As easy as /aitch-tee-tee-pie/ Modern, user-friendly command-line HTTP client",
     category: "Network",
@@ -232,7 +232,7 @@ tools = [
     github_stars: 37628,
     image_url: nil
   },
-  { 
+  {
     name: "curlie",
     description: "The power of curl, the ease of use of httpie",
     category: "Network",
@@ -243,7 +243,7 @@ tools = [
     github_stars: 3592,
     image_url: nil
   },
-  { 
+  {
     name: "gh",
     description: "GitHub's official command line tool",
     category: "Git / Utility",
@@ -254,7 +254,7 @@ tools = [
     github_stars: 1705,
     image_url: nil
   },
-  { 
+  {
     name: "glow",
     description: "Render markdown on the CLI, with pizzazz!",
     category: "Utility",
@@ -265,7 +265,7 @@ tools = [
     github_stars: 23318,
     image_url: nil
   },
-  { 
+  {
     name: "gum",
     description: "A tool for glamorous shell scripts",
     category: "Utility",
@@ -276,7 +276,7 @@ tools = [
     github_stars: 22960,
     image_url: nil
   },
-  { 
+  {
     name: "vhs",
     description: "Your CLI home video recorder",
     category: "Utility",
@@ -287,7 +287,7 @@ tools = [
     github_stars: 18784,
     image_url: nil
   },
-  { 
+  {
     name: "navi",
     description: "An interactive cheatsheet tool for the command-line",
     category: "Utility",
@@ -298,7 +298,7 @@ tools = [
     github_stars: 16786,
     image_url: nil
   },
-  { 
+  {
     name: "tealdeer",
     description: "A very fast implementation of tldr in Rust",
     category: "Utility",
@@ -309,7 +309,7 @@ tools = [
     github_stars: 6003,
     image_url: nil
   },
-  { 
+  {
     name: "procs",
     description: "A modern replacement for ps written in Rust",
     category: "Utility",
@@ -320,7 +320,7 @@ tools = [
     github_stars: 5948,
     image_url: nil
   },
-  { 
+  {
     name: "sd",
     description: "Intuitive find & replace CLI (sed alternative)",
     category: "Utility",
@@ -331,7 +331,7 @@ tools = [
     github_stars: 6950,
     image_url: nil
   },
-  { 
+  {
     name: "grex",
     description: "A command-line tool and library for generating regular expressions from user-provided test cases",
     category: "Utility",
@@ -342,7 +342,7 @@ tools = [
     github_stars: 8055,
     image_url: nil
   },
-  { 
+  {
     name: "hyperfine",
     description: "A command-line benchmarking tool",
     category: "Utility",
@@ -353,7 +353,7 @@ tools = [
     github_stars: 27629,
     image_url: nil
   },
-  { 
+  {
     name: "mcfly",
     description: "Fly through your shell history. Great Scott!",
     category: "Utility",
@@ -364,7 +364,7 @@ tools = [
     github_stars: 7619,
     image_url: nil
   },
-  { 
+  {
     name: "choose",
     description: "A human-friendly and fast alternative to cut and (sometimes) awk",
     category: "Utility",
@@ -375,7 +375,7 @@ tools = [
     github_stars: 2192,
     image_url: nil
   },
-  { 
+  {
     name: "tokei",
     description: "Count your code, quickly.",
     category: "Utility",
@@ -386,7 +386,7 @@ tools = [
     github_stars: 14020,
     image_url: nil
   },
-  { 
+  {
     name: "dog",
     description: "A command-line DNS client",
     category: "Network",
@@ -397,7 +397,7 @@ tools = [
     github_stars: 6621,
     image_url: nil
   },
-  { 
+  {
     name: "gping",
     description: "Ping, but with a graph",
     category: "Network",
@@ -408,7 +408,7 @@ tools = [
     github_stars: 12359,
     image_url: nil
   },
-  { 
+  {
     name: "xh",
     description: "Friendly and fast tool for sending HTTP requests",
     category: "Network",
@@ -419,7 +419,7 @@ tools = [
     github_stars: 7624,
     image_url: nil
   },
-  { 
+  {
     name: "bandwhich",
     description: "Terminal bandwidth utilization tool",
     category: "Network",
@@ -430,7 +430,7 @@ tools = [
     github_stars: 11589,
     image_url: nil
   },
-  { 
+  {
     name: "trippy",
     description: "A network diagnostic tool",
     category: "Network",
@@ -441,7 +441,7 @@ tools = [
     github_stars: 6662,
     image_url: nil
   },
-  { 
+  {
     name: "dua",
     description: "View disk space usage and delete unwanted data, fast.",
     category: "Utility",
@@ -452,7 +452,7 @@ tools = [
     github_stars: 5649,
     image_url: nil
   },
-  { 
+  {
     name: "diskus",
     description: "A minimal, fast alternative to 'du -sh'",
     category: "Utility",
@@ -463,7 +463,7 @@ tools = [
     github_stars: 1179,
     image_url: nil
   },
-  { 
+  {
     name: "watchexec",
     description: "Executes commands in response to file modifications",
     category: "Utility",
@@ -474,7 +474,7 @@ tools = [
     github_stars: 6801,
     image_url: nil
   },
-  { 
+  {
     name: "entr",
     description: "Run arbitrary commands when files change",
     category: "Utility",
@@ -485,7 +485,7 @@ tools = [
     github_stars: 5484,
     image_url: nil
   },
-  { 
+  {
     name: "just",
     description: "Just a command runner",
     category: "Utility",
@@ -496,7 +496,7 @@ tools = [
     github_stars: 31815,
     image_url: nil
   },
-  { 
+  {
     name: "macchina",
     description: "A system information fetcher, with an emphasis on performance and minimalism.",
     category: "System Info",
@@ -507,7 +507,7 @@ tools = [
     github_stars: 1877,
     image_url: nil
   },
-  { 
+  {
     name: "neofetch",
     description: "A command-line system information tool written in bash 3.2+",
     category: "System Info",
@@ -518,7 +518,7 @@ tools = [
     github_stars: 23560,
     image_url: nil
   },
-  { 
+  {
     name: "fastfetch",
     description: "Like neofetch, but much faster because written in c.",
     category: "System Info",
@@ -529,7 +529,7 @@ tools = [
     github_stars: 20446,
     image_url: nil
   },
-  { 
+  {
     name: "onefetch",
     description: "Command-line Git information tool",
     category: "System Info",
@@ -540,7 +540,7 @@ tools = [
     github_stars: 11603,
     image_url: nil
   },
-  { 
+  {
     name: "hexyl",
     description: "A command-line hex viewer",
     category: "Utility",
@@ -551,7 +551,7 @@ tools = [
     github_stars: 9982,
     image_url: nil
   },
-  { 
+  {
     name: "xxd",
     description: "Make a hexdump or do the reverse.",
     category: "Utility",
@@ -562,7 +562,7 @@ tools = [
     github_stars: 39949,
     image_url: nil
   },
-  { 
+  {
     name: "bat-extras",
     description: "Bash scripts that integrate bat with various command line tools",
     category: "Utility",
@@ -573,7 +573,7 @@ tools = [
     github_stars: 1552,
     image_url: nil
   },
-  { 
+  {
     name: "fzf-obc",
     description: "fzf source completion",
     category: "Utility",
@@ -584,7 +584,7 @@ tools = [
     github_stars: 55,
     image_url: nil
   },
-  { 
+  {
     name: "nvm",
     description: "Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions",
     category: "Version Manager",
@@ -595,7 +595,7 @@ tools = [
     github_stars: 91994,
     image_url: nil
   },
-  { 
+  {
     name: "asdf",
     description: "Manage multiple runtime versions with a single CLI tool",
     category: "Version Manager",
@@ -606,7 +606,7 @@ tools = [
     github_stars: 25132,
     image_url: nil
   },
-  { 
+  {
     name: "rtx",
     description: "mise-en-place: The front-end to your dev env (formerly rtx)",
     category: "Version Manager",
@@ -617,7 +617,7 @@ tools = [
     github_stars: 25223,
     image_url: nil
   },
-  { 
+  {
     name: "fnm",
     description: "Fast and simple Node.js version manager, built in Rust",
     category: "Version Manager",
@@ -628,7 +628,7 @@ tools = [
     github_stars: 24201,
     image_url: nil
   },
-  { 
+  {
     name: "volta",
     description: "The Hassle-Free JavaScript Tool Manager",
     category: "Version Manager",
@@ -639,7 +639,7 @@ tools = [
     github_stars: 12813,
     image_url: nil
   },
-  { 
+  {
     name: "pyenv",
     description: "Simple Python version management",
     category: "Version Manager",
@@ -650,7 +650,7 @@ tools = [
     github_stars: 44344,
     image_url: nil
   },
-  { 
+  {
     name: "poetry",
     description: "Python dependency management and packaging made easy.",
     category: "Package Manager",
@@ -661,7 +661,7 @@ tools = [
     github_stars: 34268,
     image_url: nil
   },
-  { 
+  {
     name: "uv",
     description: "An extremely fast Python package and project manager, written in Rust.",
     category: "Package Manager",
@@ -672,7 +672,7 @@ tools = [
     github_stars: 80209,
     image_url: nil
   },
-  { 
+  {
     name: "ruff",
     description: "An extremely fast Python linter and code formatter, written in Rust.",
     category: "Linter / Formatter",
@@ -683,7 +683,7 @@ tools = [
     github_stars: 46081,
     image_url: nil
   },
-  { 
+  {
     name: "pnpm",
     description: "Fast, disk space efficient package manager",
     category: "Package Manager",
@@ -694,7 +694,7 @@ tools = [
     github_stars: 34195,
     image_url: nil
   },
-  { 
+  {
     name: "bun",
     description: "Incredibly fast JavaScript runtime, bundler, test runner, and package manager",
     category: "Runtime / Utility",
@@ -705,7 +705,7 @@ tools = [
     github_stars: 87813,
     image_url: nil
   },
-  { 
+  {
     name: "deno",
     description: "A modern runtime for JavaScript and TypeScript.",
     category: "Runtime / Utility",
@@ -716,7 +716,7 @@ tools = [
     github_stars: 106272,
     image_url: nil
   },
-  { 
+  {
     name: "tldr",
     description: "Simplified and community-driven man pages",
     category: "Utility",
@@ -727,7 +727,7 @@ tools = [
     github_stars: 61520,
     image_url: nil
   },
-  { 
+  {
     name: "cheat",
     description: "cheat allows you to create and view interactive cheatsheets on the command-line.",
     category: "Utility",
@@ -738,7 +738,7 @@ tools = [
     github_stars: 13181,
     image_url: nil
   },
-  { 
+  {
     name: "broot",
     description: "A new way to see and navigate directory trees",
     category: "Utility",
@@ -749,7 +749,7 @@ tools = [
     github_stars: 12454,
     image_url: nil
   },
-  { 
+  {
     name: "lf",
     description: "Terminal file manager",
     category: "File Manager",
@@ -760,7 +760,7 @@ tools = [
     github_stars: 9098,
     image_url: nil
   },
-  { 
+  {
     name: "ranger",
     description: "A VIM-inspired filemanager for the console",
     category: "File Manager",
@@ -771,7 +771,7 @@ tools = [
     github_stars: 16960,
     image_url: nil
   },
-  { 
+  {
     name: "yazi",
     description: "Blazing fast terminal file manager written in Rust, based on async I/O.",
     category: "File Manager",
@@ -782,7 +782,7 @@ tools = [
     github_stars: 33406,
     image_url: nil
   },
-  { 
+  {
     name: "nnn",
     description: "n³ The unorthodox terminal file manager",
     category: "File Manager",
@@ -793,7 +793,7 @@ tools = [
     github_stars: 21344,
     image_url: nil
   },
-  { 
+  {
     name: "mc",
     description: "Midnight Commander is a visual file manager",
     category: "File Manager",
@@ -804,7 +804,7 @@ tools = [
     github_stars: 744,
     image_url: nil
   },
-  { 
+  {
     name: "k9s",
     description: "Kubernetes CLI To Manage Your Clusters In Style",
     category: "TUI / Kubernetes",
@@ -815,7 +815,7 @@ tools = [
     github_stars: 32958,
     image_url: nil
   },
-  { 
+  {
     name: "helm",
     description: "The Kubernetes Package Manager",
     category: "Kubernetes",
@@ -826,7 +826,7 @@ tools = [
     github_stars: 29540,
     image_url: nil
   },
-  { 
+  {
     name: "kubectl",
     description: "Production-Grade Container Scheduling and Management",
     category: "Kubernetes",
@@ -837,7 +837,7 @@ tools = [
     github_stars: 3230,
     image_url: nil
   },
-  { 
+  {
     name: "minikube",
     description: "Run Kubernetes locally",
     category: "Kubernetes",
@@ -848,7 +848,7 @@ tools = [
     github_stars: 31548,
     image_url: nil
   },
-  { 
+  {
     name: "k3d",
     description: "Little helper to run CNCF's k3s in Docker",
     category: "Kubernetes",
@@ -859,7 +859,7 @@ tools = [
     github_stars: 6288,
     image_url: nil
   },
-  { 
+  {
     name: "kind",
     description: "Kubernetes IN Docker - local clusters for testing Kubernetes",
     category: "Kubernetes",
@@ -870,7 +870,7 @@ tools = [
     github_stars: 15052,
     image_url: nil
   },
-  { 
+  {
     name: "terraform",
     description: "Terraform enables you to safely and predictably create, change, and improve infrastructure.",
     category: "Infrastructure",
@@ -881,7 +881,7 @@ tools = [
     github_stars: 47836,
     image_url: nil
   },
-  { 
+  {
     name: "terragrunt",
     description: "Terragrunt is a thin wrapper for Terraform that provides extra tools",
     category: "Infrastructure",
@@ -892,7 +892,7 @@ tools = [
     github_stars: 9359,
     image_url: nil
   },
-  { 
+  {
     name: "pulumi",
     description: "Pulumi - Developer-First Infrastructure as Code",
     category: "Infrastructure",
@@ -903,7 +903,7 @@ tools = [
     github_stars: 24838,
     image_url: nil
   },
-  { 
+  {
     name: "ansible",
     description: "Ansible is a radically simple IT automation platform",
     category: "Infrastructure",
@@ -914,7 +914,7 @@ tools = [
     github_stars: 68151,
     image_url: nil
   },
-  { 
+  {
     name: "vagrant",
     description: "Vagrant is a tool for building and distributing development environments.",
     category: "Infrastructure",
@@ -925,7 +925,7 @@ tools = [
     github_stars: 27221,
     image_url: nil
   },
-  { 
+  {
     name: "packer",
     description: "Packer is a tool for creating identical machine images for multiple platforms from a single source configuration.",
     category: "Infrastructure",
@@ -936,7 +936,7 @@ tools = [
     github_stars: 15617,
     image_url: nil
   },
-  { 
+  {
     name: "docker",
     description: "A platform for developers and sysadmins to build, run, and share applications with containers.",
     category: "Container",
@@ -947,7 +947,7 @@ tools = [
     github_stars: 5720,
     image_url: nil
   },
-  { 
+  {
     name: "podman",
     description: "A tool for managing OCI containers and pods.",
     category: "Container",
@@ -958,7 +958,7 @@ tools = [
     github_stars: 30875,
     image_url: nil
   },
-  { 
+  {
     name: "lazydocker",
     description: "The lazier way to manage everything docker",
     category: "TUI / Container",
@@ -969,7 +969,7 @@ tools = [
     github_stars: 49959,
     image_url: nil
   },
-  { 
+  {
     name: "dive",
     description: "A tool for exploring each layer in a docker image",
     category: "Utility",
@@ -980,7 +980,7 @@ tools = [
     github_stars: 53472,
     image_url: nil
   },
-  { 
+  {
     name: "skopeo",
     description: "Work with remote images registries - retrieving information, images, signing content",
     category: "Container",
@@ -991,7 +991,7 @@ tools = [
     github_stars: 10521,
     image_url: nil
   },
-  { 
+  {
     name: "buildah",
     description: "A tool that facilitates building OCI images",
     category: "Container",
@@ -1002,7 +1002,7 @@ tools = [
     github_stars: 8646,
     image_url: nil
   },
-  { 
+  {
     name: "aws-cli",
     description: "Universal Command Line Interface for Amazon Web Services",
     category: "Cloud",
@@ -1013,7 +1013,7 @@ tools = [
     github_stars: 16793,
     image_url: nil
   },
-  { 
+  {
     name: "azure-cli",
     description: "Azure Command-Line Interface",
     category: "Cloud",
@@ -1024,7 +1024,7 @@ tools = [
     github_stars: 4464,
     image_url: nil
   },
-  { 
+  {
     name: "google-cloud-sdk",
     description: "Google Cloud CLI",
     category: "Cloud",
@@ -1035,7 +1035,7 @@ tools = [
     github_stars: 5226,
     image_url: nil
   },
-  { 
+  {
     name: "doctl",
     description: "The official command line interface for the DigitalOcean API",
     category: "Cloud",
@@ -1046,7 +1046,7 @@ tools = [
     github_stars: 3400,
     image_url: nil
   },
-  { 
+  {
     name: "flyctl",
     description: "Command line tools for fly.io",
     category: "Cloud",
@@ -1057,7 +1057,7 @@ tools = [
     github_stars: 1621,
     image_url: nil
   },
-  { 
+  {
     name: "vercel",
     description: "Vercel CLI",
     category: "Cloud",
@@ -1068,7 +1068,7 @@ tools = [
     github_stars: 14936,
     image_url: nil
   },
-  { 
+  {
     name: "netlify-cli",
     description: "Netlify Command Line Interface",
     category: "Cloud",
@@ -1079,7 +1079,7 @@ tools = [
     github_stars: 1809,
     image_url: nil
   },
-  { 
+  {
     name: "heroku-cli",
     description: "Heroku CLI",
     category: "Cloud",
@@ -1090,7 +1090,7 @@ tools = [
     github_stars: 876,
     image_url: nil
   },
-  { 
+  {
     name: "wrangler",
     description: "Cloudflare Workers CLI",
     category: "Cloud",
@@ -1101,7 +1101,7 @@ tools = [
     github_stars: 3849,
     image_url: nil
   },
-  { 
+  {
     name: "ngrok",
     description: "Secure introspectable tunnels to localhost webhook development tool and debugging tool.",
     category: "Network",
@@ -1112,7 +1112,7 @@ tools = [
     github_stars: 24469,
     image_url: nil
   },
-  { 
+  {
     name: "localtunnel",
     description: "localtunnel exposes your localhost to the world for easy testing and sharing!",
     category: "Network",
@@ -1123,7 +1123,7 @@ tools = [
     github_stars: 22113,
     image_url: nil
   },
-  { 
+  {
     name: "caddy",
     description: "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS",
     category: "Web Server",
@@ -1134,7 +1134,7 @@ tools = [
     github_stars: 70523,
     image_url: nil
   },
-  { 
+  {
     name: "nginx",
     description: "NGINX is a high performance edge web server",
     category: "Web Server",
@@ -1145,7 +1145,7 @@ tools = [
     github_stars: 29554,
     image_url: nil
   },
-  { 
+  {
     name: "hugo",
     description: "The world's fastest framework for building websites.",
     category: "Static Site Generator",
@@ -1156,7 +1156,7 @@ tools = [
     github_stars: 86891,
     image_url: nil
   },
-  { 
+  {
     name: "zola",
     description: "A fast static site generator in a single binary with everything built-in.",
     category: "Static Site Generator",
@@ -1167,7 +1167,7 @@ tools = [
     github_stars: 16692,
     image_url: nil
   },
-  { 
+  {
     name: "jekyll",
     description: "Jekyll is a blog-aware static site generator in Ruby",
     category: "Static Site Generator",
@@ -1178,7 +1178,7 @@ tools = [
     github_stars: 51422,
     image_url: nil
   },
-  { 
+  {
     name: "eleventy",
     description: "A simpler static site generator",
     category: "Static Site Generator",
@@ -1189,7 +1189,7 @@ tools = [
     github_stars: 19444,
     image_url: nil
   },
-  { 
+  {
     name: "astro",
     description: "The web framework for content-driven websites.",
     category: "Web Framework",
@@ -1200,7 +1200,7 @@ tools = [
     github_stars: 57242,
     image_url: nil
   },
-  { 
+  {
     name: "next.js",
     description: "The React Framework",
     category: "Web Framework",
@@ -1211,7 +1211,7 @@ tools = [
     github_stars: 138104,
     image_url: nil
   },
-  { 
+  {
     name: "nuxt",
     description: "The Intuitive Vue Framework.",
     category: "Web Framework",
@@ -1222,7 +1222,7 @@ tools = [
     github_stars: 59744,
     image_url: nil
   },
-  { 
+  {
     name: "sveltekit",
     description: "The fastest way to build Svelte apps.",
     category: "Web Framework",
@@ -1233,7 +1233,7 @@ tools = [
     github_stars: 20326,
     image_url: nil
   },
-  { 
+  {
     name: "remix",
     description: "Build Better Websites. Create modern, resilient user experiences with web fundamentals.",
     category: "Web Framework",
@@ -1244,7 +1244,7 @@ tools = [
     github_stars: 32434,
     image_url: nil
   },
-  { 
+  {
     name: "vite",
     description: "Next generation frontend tooling. It's fast!",
     category: "Build Tool",
@@ -1255,7 +1255,7 @@ tools = [
     github_stars: 78541,
     image_url: nil
   },
-  { 
+  {
     name: "esbuild",
     description: "An extremely fast JavaScript and CSS bundler and minifier.",
     category: "Build Tool",
@@ -1266,7 +1266,7 @@ tools = [
     github_stars: 39803,
     image_url: nil
   },
-  { 
+  {
     name: "swc",
     description: "Rust-based platform for the Web",
     category: "Build Tool",
@@ -1277,7 +1277,7 @@ tools = [
     github_stars: 33274,
     image_url: nil
   },
-  { 
+  {
     name: "biome",
     description: "A toolchain for web projects, aimed to provide functionalities to maintain them.",
     category: "Linter / Formatter",
@@ -1288,7 +1288,7 @@ tools = [
     github_stars: 23877,
     image_url: nil
   },
-  { 
+  {
     name: "prettier",
     description: "Prettier is an opinionated code formatter.",
     category: "Linter / Formatter",
@@ -1299,7 +1299,7 @@ tools = [
     github_stars: 51688,
     image_url: nil
   },
-  { 
+  {
     name: "eslint",
     description: "Find and fix problems in your JavaScript code.",
     category: "Linter / Formatter",
@@ -1310,7 +1310,7 @@ tools = [
     github_stars: 27130,
     image_url: nil
   },
-  { 
+  {
     name: "typescript",
     description: "TypeScript is a superset of JavaScript that compiles to clean JavaScript output.",
     category: "Compiler",
@@ -1321,7 +1321,7 @@ tools = [
     github_stars: 108005,
     image_url: nil
   },
-  { 
+  {
     name: "rustup",
     description: "The Rust toolchain installer",
     category: "Version Manager",
@@ -1332,7 +1332,7 @@ tools = [
     github_stars: 6801,
     image_url: nil
   },
-  { 
+  {
     name: "cargo",
     description: "The Rust package manager",
     category: "Package Manager",
@@ -1343,7 +1343,7 @@ tools = [
     github_stars: 14674,
     image_url: nil
   },
-  { 
+  {
     name: "clippy",
     description: "A bunch of lints to catch common mistakes and improve your Rust code.",
     category: "Linter / Formatter",
@@ -1354,7 +1354,7 @@ tools = [
     github_stars: 12937,
     image_url: nil
   },
-  { 
+  {
     name: "rustfmt",
     description: "A tool for formatting Rust code according to style guidelines.",
     category: "Linter / Formatter",
@@ -1365,7 +1365,7 @@ tools = [
     github_stars: 6766,
     image_url: nil
   },
-  { 
+  {
     name: "golang",
     description: "The Go programming language",
     category: "Compiler",
@@ -1376,7 +1376,7 @@ tools = [
     github_stars: 132833,
     image_url: nil
   },
-  { 
+  {
     name: "gofmt",
     description: "Gofmt formats Go programs.",
     category: "Linter / Formatter",
@@ -1387,7 +1387,7 @@ tools = [
     github_stars: 132833,
     image_url: nil
   },
-  { 
+  {
     name: "golangci-lint",
     description: "Fast linters runner for Go.",
     category: "Linter / Formatter",
@@ -1398,7 +1398,7 @@ tools = [
     github_stars: 18613,
     image_url: nil
   },
-  { 
+  {
     name: "delve",
     description: "Delve is a debugger for the Go programming language.",
     category: "Debugger",
@@ -1409,7 +1409,7 @@ tools = [
     github_stars: 24637,
     image_url: nil
   },
-  { 
+  {
     name: "ruby",
     description: "The Ruby Programming Language",
     category: "Runtime",
@@ -1420,7 +1420,7 @@ tools = [
     github_stars: 23507,
     image_url: nil
   },
-  { 
+  {
     name: "bundler",
     description: "Manage your Ruby application's gem dependencies",
     category: "Package Manager",
@@ -1431,7 +1431,7 @@ tools = [
     github_stars: 3903,
     image_url: nil
   },
-  { 
+  {
     name: "rubocop",
     description: "A Ruby static code analyzer and formatter, based on the community Ruby style guide.",
     category: "Linter / Formatter",
@@ -1442,7 +1442,7 @@ tools = [
     github_stars: 12842,
     image_url: nil
   },
-  { 
+  {
     name: "rails",
     description: "Ruby on Rails",
     category: "Web Framework",
@@ -1453,7 +1453,7 @@ tools = [
     github_stars: 58301,
     image_url: nil
   },
-  { 
+  {
     name: "php",
     description: "The PHP source repository",
     category: "Runtime",
@@ -1464,7 +1464,7 @@ tools = [
     github_stars: 39951,
     image_url: nil
   },
-  { 
+  {
     name: "composer",
     description: "Dependency Manager for PHP",
     category: "Package Manager",
@@ -1475,7 +1475,7 @@ tools = [
     github_stars: 29329,
     image_url: nil
   },
-  { 
+  {
     name: "laravel",
     description: "A PHP framework for web artisans",
     category: "Web Framework",
@@ -1486,7 +1486,7 @@ tools = [
     github_stars: 83832,
     image_url: nil
   },
-  { 
+  {
     name: "phpunit",
     description: "The PHP Unit Testing framework.",
     category: "Testing",
@@ -1497,7 +1497,7 @@ tools = [
     github_stars: 20005,
     image_url: nil
   },
-  { 
+  {
     name: "java",
     description: "OpenJDK",
     category: "Compiler",
@@ -1508,7 +1508,7 @@ tools = [
     github_stars: 22657,
     image_url: nil
   },
-  { 
+  {
     name: "maven",
     description: "Apache Maven",
     category: "Build Tool",
@@ -1519,7 +1519,7 @@ tools = [
     github_stars: 4976,
     image_url: nil
   },
-  { 
+  {
     name: "gradle",
     description: "Adaptable, fast automation for all",
     category: "Build Tool",
@@ -1530,7 +1530,7 @@ tools = [
     github_stars: 18413,
     image_url: nil
   },
-  { 
+  {
     name: "spring-boot",
     description: "Spring Boot",
     category: "Web Framework",
@@ -1541,7 +1541,7 @@ tools = [
     github_stars: 80124,
     image_url: nil
   },
-  { 
+  {
     name: "kotlin",
     description: "The Kotlin Programming Language.",
     category: "Compiler",
@@ -1552,7 +1552,7 @@ tools = [
     github_stars: 52406,
     image_url: nil
   },
-  { 
+  {
     name: "swift",
     description: "The Swift Programming Language",
     category: "Compiler",
@@ -1563,7 +1563,7 @@ tools = [
     github_stars: 69803,
     image_url: nil
   },
-  { 
+  {
     name: "xcode",
     description: "Xcode",
     category: "IDE / Toolchain",
@@ -1574,7 +1574,7 @@ tools = [
     github_stars: 69803,
     image_url: nil
   },
-  { 
+  {
     name: "cocoapods",
     description: "The Dependency Manager for iOS & Mac projects.",
     category: "Package Manager",
@@ -1585,7 +1585,7 @@ tools = [
     github_stars: 14810,
     image_url: nil
   },
-  { 
+  {
     name: "fastlane",
     description: "The easiest way to automate building and releasing your iOS and Android apps",
     category: "Utility",
@@ -1596,7 +1596,7 @@ tools = [
     github_stars: 41119,
     image_url: nil
   },
-  { 
+  {
     name: "flutter",
     description: "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
     category: "Web Framework",
@@ -1607,7 +1607,7 @@ tools = [
     github_stars: 175420,
     image_url: nil
   },
-  { 
+  {
     name: "react-native",
     description: "A framework for building native applications using React",
     category: "Web Framework",
@@ -1618,7 +1618,7 @@ tools = [
     github_stars: 125496,
     image_url: nil
   },
-  { 
+  {
     name: "expo",
     description: "An open-source platform for making universal native apps with React.",
     category: "Web Framework",

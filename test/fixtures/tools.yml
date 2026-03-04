@@ -4,6 +4,7 @@ one:
   category: Editor
   stable_version: v0.9.5
   github_url: https://github.com/neovim/neovim
+  slug: neovim
 
 two:
   name: ripgrep
@@ -11,3 +12,4 @@ two:
   category: Utility
   stable_version: 14.1.0
   github_url: https://github.com/BurntSushi/ripgrep
+  slug: ripgrep

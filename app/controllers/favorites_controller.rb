@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def create
-    @tool = Tool.find(params[:tool_id])
+    @tool = Tool.find_by!(slug: params[:tool_id])
     Current.user.favorites.find_or_create_by(tool: @tool)
 
     respond_to do |format|
@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @tool = Tool.find(params[:tool_id])
+    @tool = Tool.find_by!(slug: params[:tool_id])
     Current.user.favorites.find_by(tool: @tool)&.destroy
 
     respond_to do |format|
