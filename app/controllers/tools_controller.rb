@@ -6,6 +6,10 @@ class ToolsController < ApplicationController
   def index
     @tools = Tool.order(github_stars: :desc, name: :asc)
 
+    if params[:favorites].present? && authenticated?
+      @tools = Current.user.tools.order(github_stars: :desc, name: :asc)
+    end
+
     if params[:category].present?
       @tools = @tools.where(category: params[:category])
     end

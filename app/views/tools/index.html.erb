@@ -6,8 +6,16 @@
     </div>
     
     <div class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-3">
+      <% if params[:favorites].present? %>
+        <%= link_to tools_path(query: params[:query], category: params[:category]), class: "inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group h-[38px] whitespace-nowrap", data: { turbo_action: "advance" } do %>
+          <span class="mr-1">Filtered by:</span>
+          <span class="font-semibold text-blue-600 dark:text-blue-400 mr-2">Favorites</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <% end %>
+      <% end %>
+
       <% if params[:category].present? %>
-        <%= link_to tools_path(query: params[:query]), class: "inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group h-[38px] whitespace-nowrap", data: { turbo_action: "advance" } do %>
+        <%= link_to tools_path(query: params[:query], favorites: params[:favorites]), class: "inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group h-[38px] whitespace-nowrap", data: { turbo_action: "advance" } do %>
           <span class="mr-1">Category:</span>
           <span class="font-semibold text-blue-600 dark:text-blue-400 mr-2"><%= params[:category] %></span>
           <svg class="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -17,6 +25,9 @@
       <%= form_with url: tools_path, method: :get, class: "relative w-full sm:w-72", data: { turbo_frame: "tools_list", turbo_action: "advance" } do |f| %>
         <% if params[:category].present? %>
           <%= f.hidden_field :category, value: params[:category] %>
+        <% end %>
+        <% if params[:favorites].present? %>
+          <%= f.hidden_field :favorites, value: params[:favorites] %>
         <% end %>
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -34,7 +45,7 @@
     </div>
 
     <% unless @tools.last_page? %>
-      <%= turbo_frame_tag "tools_pagination", src: tools_path(page: @tools.next_page, query: params[:query], category: params[:category], format: :turbo_stream), loading: :lazy do %>
+      <%= turbo_frame_tag "tools_pagination", src: tools_path(page: @tools.next_page, query: params[:query], category: params[:category], favorites: params[:favorites], format: :turbo_stream), loading: :lazy do %>
         <div class="flex justify-center py-8 w-full">
           <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

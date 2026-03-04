@@ -7,7 +7,7 @@
     <%= turbo_stream.remove "tools_pagination" %>
   <% else %>
     <%= turbo_stream.replace "tools_pagination" do %>
-      <%= turbo_frame_tag "tools_pagination", src: tools_path(page: @tools.next_page, query: params[:query], category: params[:category], format: :turbo_stream), loading: :lazy do %>
+      <%= turbo_frame_tag "tools_pagination", src: tools_path(page: @tools.next_page, query: params[:query], category: params[:category], favorites: params[:favorites], format: :turbo_stream), loading: :lazy do %>
         <div class="flex justify-center py-8 w-full">
           <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

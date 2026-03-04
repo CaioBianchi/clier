@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :profile, only: [ :edit, :update ]
   resource :registration, only: [ :new, :create ]
   resource :session, only: [ :new, :create, :destroy ]
   resources :passwords, param: :token
