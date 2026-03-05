@@ -21,7 +21,7 @@
     </div>
   </div>
   <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap"><%= review.content %></p>
-  <% if review.user == Current.user %>
+  <% if authenticated? && review.user == Current.user %>
     <div class="mt-3 flex justify-end">
       <%= button_to "Delete", tool_review_path(review.tool, review), method: :delete, class: "text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 focus:outline-none", data: { turbo_confirm: "Are you sure?" } %>
     </div>
