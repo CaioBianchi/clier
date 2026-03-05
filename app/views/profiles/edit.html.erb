@@ -20,9 +20,31 @@
       </div>
     <% end %>
 
-    <div>
-      <%= form.label :full_name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
-      <%= form.text_field :full_name, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "e.g. John Doe" %>
+    <div class="flex items-center space-x-6">
+      <div class="flex-shrink-0">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: "h-16 w-16 object-cover rounded-full shadow-sm ring-2 ring-gray-200 dark:ring-gray-700" %>
+        <% else %>
+          <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 shadow-sm ring-2 ring-gray-200 dark:ring-gray-700">
+            <span class="text-xl font-medium leading-none text-blue-700 dark:text-blue-300"><%= @user.initials %></span>
+          </span>
+        <% end %>
+      </div>
+      <div>
+        <%= form.label :avatar, "Profile Photo", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+        <%= form.file_field :avatar, class: "block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/50 dark:file:text-blue-300" %>
+      </div>
+    </div>
+
+    <div class="flex space-x-4">
+      <div class="w-1/2">
+        <%= form.label :first_name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+        <%= form.text_field :first_name, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" %>
+      </div>
+      <div class="w-1/2">
+        <%= form.label :last_name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+        <%= form.text_field :last_name, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" %>
+      </div>
     </div>
 
     <div>

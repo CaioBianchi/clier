@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "tools#index"
   resources :tools, only: [ :index, :show ] do
     resource :favorite, only: [ :create, :destroy ]
+    resources :reviews, only: [ :create, :destroy ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

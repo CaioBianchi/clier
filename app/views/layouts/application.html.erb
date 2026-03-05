@@ -59,10 +59,19 @@
           </div>
           <div class="flex items-center space-x-4">
             <% if authenticated? %>
-              <%= link_to edit_profile_path, class: "text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors flex flex-col items-end" do %>
-                <span class="font-medium inline-block"><%= Current.user.full_name.presence || Current.user.email_address %></span>
-                <% if Current.user.location.present? %>
-                  <span class="text-[10px] text-gray-500 dark:text-gray-400 leading-none"><%= Current.user.location %></span>
+              <%= link_to edit_profile_path, class: "flex items-center space-x-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" do %>
+                <div class="flex flex-col items-end hidden sm:flex">
+                  <span class="font-medium inline-block"><%= "#{Current.user.first_name} #{Current.user.last_name}" %></span>
+                  <% if Current.user.location.present? %>
+                    <span class="text-[10px] text-gray-500 dark:text-gray-400 leading-none"><%= Current.user.location %></span>
+                  <% end %>
+                </div>
+                <% if Current.user.avatar.attached? %>
+                  <%= image_tag Current.user.avatar, class: "h-8 w-8 object-cover rounded-full shadow-sm ring-1 ring-gray-200 dark:ring-gray-700" %>
+                <% else %>
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+                    <span class="text-xs font-medium leading-none text-blue-700 dark:text-blue-300"><%= Current.user.initials %></span>
+                  </span>
                 <% end %>
               <% end %>
               <%= link_to tools_path(favorites: true), class: "hover:opacity-80 transition-opacity" do %>

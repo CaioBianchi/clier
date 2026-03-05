@@ -1,5 +1,6 @@
 class Tool < ApplicationRecord
   has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :users, through: :favorites
 
   before_validation :generate_slug, on: :create

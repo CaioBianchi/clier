@@ -12,11 +12,12 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update profile" do
-    patch profile_url, params: { user: { full_name: "New Name", location: "New Location", bio: "New Bio" } }
+    patch profile_url, params: { user: { first_name: "New", last_name: "Name", location: "New Location", bio: "New Bio" } }
     assert_redirected_to edit_profile_url
 
     @user.reload
-    assert_equal "New Name", @user.full_name
+    assert_equal "New", @user.first_name
+    assert_equal "Name", @user.last_name
     assert_equal "New Location", @user.location
     assert_equal "New Bio", @user.bio
   end

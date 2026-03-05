@@ -13,9 +13,26 @@
       </div>
     <% end %>
 
+    <div class="hidden" aria-hidden="true" style="display: none;">
+      <%= label_tag :bot_check, "Leave this field blank" %>
+      <%= text_field_tag :bot_check, "", tabindex: "-1", autocomplete: "off" %>
+    </div>
+
+    <div class="flex space-x-4">
+      <div class="w-1/2">
+        <%= form.label :first_name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+        <%= form.text_field :first_name, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white", required: true, autofocus: true %>
+      </div>
+
+      <div class="w-1/2">
+        <%= form.label :last_name, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+        <%= form.text_field :last_name, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white", required: true %>
+      </div>
+    </div>
+
     <div>
       <%= form.label :email_address, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
-      <%= form.email_field :email_address, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white", required: true, autofocus: true %>
+      <%= form.email_field :email_address, class: "block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white", required: true %>
     </div>
 
     <div>

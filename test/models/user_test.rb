@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should be valid with valid attributes" do
-    user = User.new(email_address: "test@example.com", password: "password")
+    user = User.new(email_address: "test@example.com", password: "password", first_name: "John", last_name: "Doe")
     assert user.valid?
   end
 
