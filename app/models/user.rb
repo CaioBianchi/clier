@@ -16,4 +16,25 @@ class User < ApplicationRecord
   def initials
     "#{first_name&.first}#{last_name&.first}".upcase
   end
+
+  def otp_secret
+    super || generate_otp_secret!
+  end
+
+  def generate_otp_secret!
+    secret = ROTP::Base32.random
+    update_column(:otp_secret, secret) unless new_record?
+    self.otp_secret = secret if new_record?
+    secret
+  end
+
+  def verify_otp(code)
+    totp = ROTP::TOTP.new(otp_secret, issuer: "CLIer")
+    totp.verify(code, drift_behind: 15)
+  end
+
+  def otp_provisioning_uri
+    totp = ROTP::TOTP.new(otp_secret, issuer: "CLIer")
+    totp.provisioning_uri(email_address)
+  end
 end

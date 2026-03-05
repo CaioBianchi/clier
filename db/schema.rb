@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_191829) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_192621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -95,6 +95,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_191829) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "location"
+    t.boolean "otp_enabled", default: false, null: false
+    t.string "otp_secret"
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true

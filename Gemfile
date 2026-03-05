@@ -68,5 +68,7 @@ group :test do
 end
 
 gem "kaminari", "~> 1.2"
+gem "rotp"
+gem "rqrcode"
 
 gem "webmock", "~> 3.26", group: :test

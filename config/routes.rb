@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resource :profile, only: [ :edit, :update ]
+  resource :two_factor_settings, only: [ :new, :create, :destroy ]
   resource :registration, only: [ :new, :create ]
-  resource :session, only: [ :new, :create, :destroy ]
+  resource :session, only: [ :new, :create, :destroy ] do
+    collection do
+      get :two_factor
+      post :two_factor
+    end
+  end
   resources :passwords, param: :token
   root "tools#index"
   resources :tools, only: [ :index, :show ] do
