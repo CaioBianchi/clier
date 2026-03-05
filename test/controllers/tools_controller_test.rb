@@ -46,4 +46,44 @@ class ToolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: "Neovim"
     assert_select "h2", text: "ripgrep", count: 0
   end
+
+  test "should not allow non-admins to delete tools" do
+    tool = tools(:one)
+    delete tool_url(tool)
+    assert_redirected_to tool_url(tool)
+    assert_equal "You are not authorized to delete this tool.", flash[:alert]
+  end
+
+  test "should allow admins to delete tools" do
+    admin = users(:one)
+    admin.update!(role: :admin)
+    sign_in_as(admin)
+
+    tool = tools(:one)
+    assert_difference("Tool.count", -1) do
+      delete tool_url(tool)
+    end
+    assert_redirected_to tools_url
+    assert_equal "Tool was successfully deleted.", flash[:notice]
+  end
+
+  test "should not allow non-admins to spotlight tools" do
+    tool = tools(:one)
+    patch spotlight_tool_url(tool)
+    assert_redirected_to tool_url(tool)
+    assert_equal "You are not authorized to perform this action.", flash[:alert]
+    assert_not tool.reload.spotlighted?
+  end
+
+  test "should allow admins to spotlight tools" do
+    admin = users(:one)
+    admin.update!(role: :admin)
+    sign_in_as(admin)
+
+    tool = tools(:one)
+    patch spotlight_tool_url(tool)
+    assert_redirected_to tools_url
+    assert_equal "#{tool.name} is now the spotlighted tool.", flash[:notice]
+    assert tool.reload.spotlighted?
+  end
 end

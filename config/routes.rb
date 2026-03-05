@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   root "tools#index"
   resources :tools, only: [ :index, :show, :destroy ] do
+    member do
+      patch :spotlight
+    end
     resource :favorite, only: [ :create, :destroy ]
     resources :reviews, only: [ :create, :destroy ]
   end

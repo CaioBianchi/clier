@@ -13,11 +13,17 @@ development:
   update_tools:
     class: UpdateToolsJob
     schedule: every 6 hours
+  rotate_spotlight:
+    class: RotateSpotlightJob
+    schedule: every week
 
 production:
   update_tools:
     class: UpdateToolsJob
     schedule: every 6 hours
+  rotate_spotlight:
+    class: RotateSpotlightJob
+    schedule: every week
   clear_solid_queue_finished_jobs:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
     schedule: every hour at minute 12

@@ -6,6 +6,15 @@ class Tool < ApplicationRecord
   before_validation :generate_slug, on: :create
   validates :slug, presence: true, uniqueness: true
 
+  scope :spotlighted, -> { where(spotlighted: true) }
+
+  def self.set_spotlight!(tool)
+    transaction do
+      spotlighted.where.not(id: tool.id).update_all(spotlighted: false)
+      tool.update!(spotlighted: true)
+    end
+  end
+
   def to_param
     slug
   end

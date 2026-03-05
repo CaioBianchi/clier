@@ -4,6 +4,7 @@ class ToolsController < ApplicationController
   allow_unauthenticated_access
 
   def index
+    @spotlight_tool = Tool.spotlighted.first
     @categories = Tool.group(:category).order("count_all DESC").count.keys.compact
     @tools = Tool.order(github_stars: :desc, name: :asc)
 
@@ -54,6 +55,16 @@ class ToolsController < ApplicationController
       redirect_to tools_path, notice: "Tool was successfully deleted."
     else
       redirect_to tool_path(@tool), alert: "You are not authorized to delete this tool."
+    end
+  end
+
+  def spotlight
+    @tool = Tool.find_by!(slug: params[:id])
+    if authenticated? && Current.user.admin?
+      Tool.set_spotlight!(@tool)
+      redirect_to tools_path, notice: "#{@tool.name} is now the spotlighted tool."
+    else
+      redirect_to tool_path(@tool), alert: "You are not authorized to perform this action."
     end
   end
 

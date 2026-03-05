@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_221314) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_222127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_221314) do
     t.string "name"
     t.text "readme_html"
     t.string "slug"
+    t.boolean "spotlighted", default: false, null: false
     t.string "stable_version"
     t.datetime "updated_at", null: false
     t.string "website_url"
