@@ -47,6 +47,16 @@ class ToolsController < ApplicationController
     end
   end
 
+  def destroy
+    @tool = Tool.find_by!(slug: params[:id])
+    if authenticated? && Current.user.admin?
+      @tool.destroy
+      redirect_to tools_path, notice: "Tool was successfully deleted."
+    else
+      redirect_to tool_path(@tool), alert: "You are not authorized to delete this tool."
+    end
+  end
+
   private
 
   def fetch_readme_html(tool)

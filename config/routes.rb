@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :profile, only: [ :edit, :update ]
+  resource :profile, only: [ :edit, :update ] do
+    patch :password, on: :collection, to: "profiles#update_password"
+  end
   resource :two_factor_settings, only: [ :new, :create, :destroy ]
   resource :registration, only: [ :new, :create ]
   resource :session, only: [ :new, :create, :destroy ] do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
   end
   resources :passwords, param: :token
   root "tools#index"
-  resources :tools, only: [ :index, :show ] do
+  resources :tools, only: [ :index, :show, :destroy ] do
     resource :favorite, only: [ :create, :destroy ]
     resources :reviews, only: [ :create, :destroy ]
   end

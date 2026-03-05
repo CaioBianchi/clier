@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  enum :role, { member: 0, admin: 1 }
+
   validates :email_address, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true

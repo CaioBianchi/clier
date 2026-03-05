@@ -27,4 +27,22 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_url
     assert_redirected_to new_session_url
   end
+
+  test "should update password with valid challenge" do
+    patch password_profile_url, params: { user: { password_challenge: "password", password: "newpassword", password_confirmation: "newpassword" } }
+    assert_redirected_to edit_profile_url
+    assert_equal "Password updated successfully.", flash[:notice]
+
+    @user.reload
+    assert @user.authenticate("newpassword")
+  end
+
+  test "should not update password with invalid challenge" do
+    patch password_profile_url, params: { user: { password_challenge: "wrongpassword", password: "newpassword", password_confirmation: "newpassword" } }
+    assert_redirected_to edit_profile_url
+    assert_equal "Password challenge is invalid", flash[:alert]
+
+    @user.reload
+    assert @user.authenticate("password")
+  end
 end

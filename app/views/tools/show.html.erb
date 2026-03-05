@@ -94,8 +94,12 @@
           </div>
 
           <div class="bg-gray-50 dark:bg-gray-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
-            <%= link_to "Close", tools_path, class: "mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto transition-colors", data: { turbo_frame: "_top", turbo_action: "advance", action: "click->modal#close" } %>
+            <%= link_to "Close", tools_path, class: "mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto transition-colors sm:ml-3", data: { turbo_frame: "_top", turbo_action: "advance", action: "click->modal#close" } %>
             
+            <% if authenticated? && Current.user.admin? %>
+              <%= button_to "Delete Tool", tool_path(@tool), method: :delete, class: "mt-3 sm:mt-0 sm:mr-auto inline-flex w-full justify-center items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto transition-colors focus:outline-none", data: { turbo_frame: "_top", turbo_confirm: "Are you sure you want to delete this tool? This cannot be undone." } %>
+            <% end %>
+
             <% if @tool.website_url.present? %>
               <a href="<%= @tool.website_url %>" target="_blank" rel="noopener noreferrer" class="mt-3 sm:mt-0 sm:mr-3 inline-flex w-full justify-center items-center rounded-md bg-white dark:bg-gray-700 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
                 <svg class="w-4 h-4 mr-2 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>

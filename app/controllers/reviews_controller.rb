@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    if @review.user == Current.user
+    if @review.user == Current.user || Current.user.admin?
       @review.destroy
       redirect_to tool_path(@tool), notice: "Review was successfully deleted."
     else
