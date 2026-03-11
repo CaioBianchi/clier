@@ -17,6 +17,10 @@ module Clier
     config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
+    config.action_dispatch.default_headers = {
+      "Cross-Origin-Embedder-Policy" => "require-corp",
+      "Cross-Origin-Opener-Policy" => "same-origin"
+    }
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.

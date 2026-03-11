@@ -3,6 +3,8 @@ class Tool < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :users, through: :favorites
 
+  has_one_attached :image
+
   before_validation :generate_slug, on: :create
   validates :slug, presence: true, uniqueness: true
 

@@ -26,7 +26,7 @@ class ToolsControllerTest < ActionDispatch::IntegrationTest
     stub_request(:get, "https://api.github.com/repos/neovim/neovim/readme").
       to_return(status: 200, body: "<h1>Test README</h1>", headers: { "Content-Type" => "text/html" })
 
-    get tool_url(tool)
+    get tool_url(tool), headers: { "Turbo-Frame" => "modal" }
     assert_response :success
   end
 

@@ -1633,7 +1633,33 @@ tools = [
 
 
 tools.each do |tool_attrs|
-  Tool.create!(tool_attrs)
+  tool = Tool.create!(tool_attrs)
+
+  # Cache the image using ActiveStorage during seeding
+  if tool.github_url.present?
+    repo = tool.github_url.split("github.com/").last
+    image_url = "https://opengraph.githubassets.com/1/#{repo}"
+
+    begin
+      require "net/http"
+      require "uri"
+
+      uri = URI(image_url)
+      image_data = Net::HTTP.get(uri)
+      if image_data
+        tool.image.attach(
+          io: StringIO.new(image_data),
+          filename: "#{repo.parameterize}-opengraph.png",
+          content_type: "image/png"
+        )
+      end
+    rescue => e
+      puts "Failed to fetch image for #{tool.name}: #{e.message}"
+    end
+
+    # Add a small delay to avoid rate limiting during seed
+    sleep 0.5
+  end
 end
 
 puts "Seeded #{Tool.count} tools!"

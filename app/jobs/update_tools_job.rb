@@ -21,13 +21,30 @@ class UpdateToolsJob < ApplicationJob
       repo = tool.github_url.split("github.com/").last
       next unless repo
 
-      # Ensure image URL is set
-      tool.image_url = "https://opengraph.githubassets.com/1/#{repo}" if tool.image_url.blank?
-
       # Fetch repo data for stars
       repo_data = fetch_json("https://api.github.com/repos/#{repo}", headers)
       if repo_data && repo_data["stargazers_count"]
         tool.github_stars = repo_data["stargazers_count"]
+      end
+
+      # Cache the image using ActiveStorage
+      if !tool.image.attached?
+        image_url = tool.image_url.presence || "https://opengraph.githubassets.com/1/#{repo}"
+        tool.image_url = image_url
+
+        begin
+          uri = URI(image_url)
+          image_data = Net::HTTP.get(uri)
+          if image_data
+            tool.image.attach(
+              io: StringIO.new(image_data),
+              filename: "#{repo.parameterize}-opengraph.png",
+              content_type: "image/png"
+            )
+          end
+        rescue => e
+          Rails.logger.error "Failed to fetch image for #{tool.name}: #{e.message}"
+        end
       end
 
       # Fetch latest release for version
