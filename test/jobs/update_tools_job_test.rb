@@ -16,6 +16,9 @@ class UpdateToolsJobTest < ActiveJob::TestCase
     stub_request(:get, "https://api.github.com/repos/test/repo/readme").
       to_return(status: 200, body: "<h1>Test README</h1>", headers: { "Content-Type" => "text/html" })
 
+    stub_request(:get, "https://opengraph.githubassets.com/1/test/repo").
+      to_return(status: 200, body: "fake image data", headers: { "Content-Type" => "image/png" })
+
     UpdateToolsJob.perform_now
 
     tool.reload
@@ -23,5 +26,6 @@ class UpdateToolsJobTest < ActiveJob::TestCase
     assert_equal "v1.0.0", tool.stable_version
     assert_equal "<h1>Test README</h1>", tool.readme_html
     assert_equal "https://opengraph.githubassets.com/1/test/repo", tool.image_url
+    assert tool.image.attached?
   end
 end
