@@ -1,0 +1,45 @@
+ARG RUBY_VERSION=4.0.1
+FROM docker.io/library/ruby:$RUBY_VERSION-slim
+
+# Install base packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential \
+    curl \
+    git \
+    libpq-dev \
+    libvips \
+    libyaml-dev \
+    pkg-config \
+    postgresql-client && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install --no-install-recommends -y nodejs && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Rails app lives here
+WORKDIR /rails
+
+# Set development environment variables
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle"
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN gem install foreman && bundle install
+
+# Install npm dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Ensure entrypoint is executable
+RUN chmod +x .docker/dev-entrypoint.sh
+
+# Entrypoint prepares the database.
+ENTRYPOINT [".docker/dev-entrypoint.sh"]
+
+# Start the development server
+EXPOSE 3000
+CMD ["./bin/dev"]
