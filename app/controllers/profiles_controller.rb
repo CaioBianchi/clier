@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
   def update
     @user = Current.user
     if @user.update(user_params)
-      redirect_to edit_profile_path, notice: "Profile updated successfully."
+      redirect_to edit_profile_path, notice: 'Profile updated successfully.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   def update_password
     @user = Current.user
     if @user.update(password_params)
-      redirect_to edit_profile_path, notice: "Password updated successfully."
+      redirect_to edit_profile_path, notice: 'Password updated successfully.'
     else
       redirect_to edit_profile_path, alert: @user.errors.full_messages.to_sentence
     end

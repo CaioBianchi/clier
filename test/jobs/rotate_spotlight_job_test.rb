@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 class RotateSpotlightJobTest < ActiveJob::TestCase
-  test "sets a spotlight tool" do
+  test 'sets a spotlight tool' do
     Tool.update_all(spotlighted: false)
     assert_nil Tool.spotlighted.first
 
@@ -10,7 +10,7 @@ class RotateSpotlightJobTest < ActiveJob::TestCase
     assert_not_nil Tool.spotlighted.first
   end
 
-  test "ensures only one tool is spotlighted at a time" do
+  test 'ensures only one tool is spotlighted at a time' do
     tool1 = tools(:one)
     tool2 = tools(:two)
 

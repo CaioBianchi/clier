@@ -1,24 +1,21 @@
-require "net/http"
+require 'net/http'
 
 class ToolsController < ApplicationController
   allow_unauthenticated_access
 
   def index
     @spotlight_tool = Tool.spotlighted.first
-    @categories = Tool.group(:category).order("count_all DESC").count.keys.compact
+    @categories = Tool.group(:category).order('count_all DESC').count.keys.compact
     @tools = Tool.order(github_stars: :desc, name: :asc)
 
-    if params[:favorites].present? && authenticated?
-      @tools = Current.user.tools.order(github_stars: :desc, name: :asc)
-    end
+    @tools = Current.user.tools.order(github_stars: :desc, name: :asc) if params[:favorites].present? && authenticated?
 
-    if params[:category].present?
-      @tools = @tools.where(category: params[:category])
-    end
+    @tools = @tools.where(category: params[:category]) if params[:category].present?
 
     if params[:query].present?
       search_term = "%#{params[:query]}%"
-      @tools = @tools.where("name ILIKE ? OR description ILIKE ? OR category ILIKE ?", search_term, search_term, search_term)
+      @tools = @tools.where('name ILIKE ? OR description ILIKE ? OR category ILIKE ?', search_term, search_term,
+                            search_term)
     end
 
     @tools = @tools.page(params[:page]).per(10)
@@ -52,9 +49,9 @@ class ToolsController < ApplicationController
     @tool = Tool.find_by!(slug: params[:id])
     if authenticated? && Current.user.admin?
       @tool.destroy
-      redirect_to tools_path, notice: "Tool was successfully deleted."
+      redirect_to tools_path, notice: 'Tool was successfully deleted.'
     else
-      redirect_to tool_path(@tool), alert: "You are not authorized to delete this tool."
+      redirect_to tool_path(@tool), alert: 'You are not authorized to delete this tool.'
     end
   end
 
@@ -64,7 +61,7 @@ class ToolsController < ApplicationController
       Tool.set_spotlight!(@tool)
       redirect_to tools_path, notice: "#{@tool.name} is now the spotlighted tool."
     else
-      redirect_to tool_path(@tool), alert: "You are not authorized to perform this action."
+      redirect_to tool_path(@tool), alert: 'You are not authorized to perform this action.'
     end
   end
 
@@ -73,16 +70,16 @@ class ToolsController < ApplicationController
   def fetch_readme_html(tool)
     return nil unless tool.github_url.present?
 
-    repo = tool.github_url.split("github.com/").last
+    repo = tool.github_url.split('github.com/').last
     return unless repo
 
     uri = URI("https://api.github.com/repos/#{repo}/readme")
     req = Net::HTTP::Get.new(uri)
-    req["Accept"] = "application/vnd.github.html"
-    req["User-Agent"] = "Clier-App"
+    req['Accept'] = 'application/vnd.github.html'
+    req['User-Agent'] = 'Clier-App'
 
-    token = ENV["GITHUB_TOKEN"] || `gh auth token 2>/dev/null`.strip
-    req["Authorization"] = "Bearer #{token}" if token.present?
+    token = ENV['GITHUB_TOKEN'] || `gh auth token 2>/dev/null`.strip
+    req['Authorization'] = "Bearer #{token}" if token.present?
 
     begin
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|

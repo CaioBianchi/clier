@@ -31,12 +31,12 @@ class User < ApplicationRecord
   end
 
   def verify_otp(code)
-    totp = ROTP::TOTP.new(otp_secret, issuer: "CLIer")
+    totp = ROTP::TOTP.new(otp_secret, issuer: 'CLIer')
     totp.verify(code, drift_behind: 15)
   end
 
   def otp_provisioning_uri
-    totp = ROTP::TOTP.new(otp_secret, issuer: "CLIer")
+    totp = ROTP::TOTP.new(otp_secret, issuer: 'CLIer')
     totp.provisioning_uri(email_address)
   end
 end

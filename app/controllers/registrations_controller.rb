@@ -7,7 +7,7 @@ class RegistrationsController < ApplicationController
 
   def create
     if params[:bot_check].present?
-      redirect_to root_path, notice: "Successfully signed up!"
+      redirect_to root_path, notice: 'Successfully signed up!'
       return
     end
 
@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to root_path, notice: "Successfully signed up!"
+      redirect_to root_path, notice: 'Successfully signed up!'
     else
       render :new, status: :unprocessable_entity
     end

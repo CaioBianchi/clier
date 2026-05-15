@@ -30,7 +30,7 @@ class Tool < ApplicationRecord
     base_slug = name.parameterize
     self.slug = base_slug
     count = 2
-    while Tool.exists?(slug: self.slug)
+    while Tool.exists?(slug: slug)
       self.slug = "#{base_slug}-#{count}"
       count += 1
     end
