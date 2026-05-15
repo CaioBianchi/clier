@@ -74,7 +74,7 @@ class ToolsController < ApplicationController
     return nil unless tool.github_url.present?
 
     repo = tool.github_url.split("github.com/").last
-    return nil unless repo
+    return unless repo
 
     uri = URI("https://api.github.com/repos/#{repo}/readme")
     req = Net::HTTP::Get.new(uri)
@@ -89,13 +89,7 @@ class ToolsController < ApplicationController
         http.request(req)
       end
 
-      if res.is_a?(Net::HTTPSuccess)
-        res.body
-      else
-        nil
-      end
-    rescue => e
-      nil
+      res.body if res.is_a?(Net::HTTPSuccess)
     end
   end
 end
