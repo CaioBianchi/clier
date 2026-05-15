@@ -4,11 +4,10 @@ class SessionsController < ApplicationController
     redirect_to new_session_path, alert: 'Try again later.'
   }
 
-  def new
-  end
+  def new; end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    if (user = User.authenticate_by(params.permit(:email_address, :password)))
       if user.otp_enabled?
         session[:pre_2fa_auth_user_id] = user.id
         redirect_to two_factor_session_path

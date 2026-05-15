@@ -4,7 +4,7 @@ require 'json'
 namespace :tools do
   desc 'Add a new tool from a GitHub URL (Usage: bin/rails tools:add URL=https://github.com/... [CATEGORY=...])'
   task add: :environment do
-    url = ENV['URL']
+    url = ENV.fetch('URL', nil)
 
     unless url.present?
       puts '❌ Error: Please provide a GitHub URL.'
@@ -45,7 +45,7 @@ namespace :tools do
     data = JSON.parse(res.body)
 
     # Determine category
-    category = ENV['CATEGORY']
+    category = ENV.fetch('CATEGORY', nil)
     if category.blank?
       topics = data['topics'] || []
 

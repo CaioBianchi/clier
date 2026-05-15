@@ -33,7 +33,7 @@ class ToolsControllerTest < ActionDispatch::IntegrationTest
   test 'should filter by favorites' do
     user = users(:one)
     tool_one = tools(:one)
-    tool_two = tools(:two)
+    tools(:two)
 
     # Ensure user one only favorites tool one
     Favorite.destroy_all

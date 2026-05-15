@@ -5,19 +5,17 @@ class PasswordsController < ApplicationController
     redirect_to new_password_path, alert: 'Try again later.'
   }
 
-  def new
-  end
+  def new; end
 
   def create
-    if user = User.find_by(email_address: params[:email_address])
+    if (user = User.find_by(email_address: params[:email_address]))
       PasswordsMailer.reset(user).deliver_later
     end
 
     redirect_to new_session_path, notice: 'Password reset instructions sent (if user with that email address exists).'
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(params.permit(:password, :password_confirmation))

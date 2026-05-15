@@ -4,7 +4,7 @@ require 'json'
 class UpdateToolsJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     Rails.logger.info 'Starting UpdateToolsJob...'
 
     headers = {
@@ -81,11 +81,7 @@ class UpdateToolsJob < ApplicationJob
         http.request(req)
       end
 
-      if res.is_a?(Net::HTTPSuccess)
-        JSON.parse(res.body)
-      else
-        nil
-      end
+      JSON.parse(res.body) if res.is_a?(Net::HTTPSuccess)
     rescue StandardError => e
       Rails.logger.error "HTTP request failed for #{url}: #{e.message}"
       nil
@@ -102,11 +98,7 @@ class UpdateToolsJob < ApplicationJob
         http.request(req)
       end
 
-      if res.is_a?(Net::HTTPSuccess)
-        res.body
-      else
-        nil
-      end
+      res.body if res.is_a?(Net::HTTPSuccess)
     rescue StandardError => e
       Rails.logger.error "HTTP request failed for #{url}: #{e.message}"
       nil
