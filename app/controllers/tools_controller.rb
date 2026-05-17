@@ -5,20 +5,15 @@ class ToolsController < ApplicationController
 
   def index
     @spotlight_tool = Tool.spotlighted.first
-    @categories = Tool.group(:category).order('count_all DESC').count.keys.compact
-    @tools = Tool.order(github_stars: :desc, name: :asc)
+    @categories = Tool.group(:category)
+                      .order('count_all DESC')
+                      .count
+                      .keys
+                      .compact
 
-    @tools = Current.user.tools.order(github_stars: :desc, name: :asc) if params[:favorites].present? && authenticated?
-
-    @tools = @tools.where(category: params[:category]) if params[:category].present?
-
-    if params[:query].present?
-      search_term = "%#{params[:query]}%"
-      @tools = @tools.where('name ILIKE ? OR description ILIKE ? OR category ILIKE ?', search_term, search_term,
-                            search_term)
-    end
-
-    @tools = @tools.page(params[:page]).per(10)
+    @tools = filtered_tools.order(github_stars: :desc, name: :asc)
+                           .page(params[:page])
+                           .per(10)
 
     respond_to do |format|
       format.html
@@ -68,25 +63,59 @@ class ToolsController < ApplicationController
   private
 
   def fetch_readme_html(tool)
-    return nil unless tool.github_url.present?
-
-    repo = tool.github_url.split('github.com/').last
+    repo = extract_github_repo(tool.github_url)
     return unless repo
 
     uri = URI("https://api.github.com/repos/#{repo}/readme")
-    req = Net::HTTP::Get.new(uri)
-    req['Accept'] = 'application/vnd.github.html'
-    req['User-Agent'] = 'Clier-App'
 
-    token = ENV['GITHUB_TOKEN'] || `gh auth token 2>/dev/null`.strip
-    req['Authorization'] = "Bearer #{token}" if token.present?
+    request = Net::HTTP::Get.new(uri).tap do |req|
+      req['Accept'] = 'application/vnd.github.html'
+      req['User-Agent'] = 'Clier-App'
 
-    begin
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-        http.request(req)
-      end
-
-      res.body if res.is_a?(Net::HTTPSuccess)
+      github_token = github_token()
+      req['Authorization'] = "Bearer #{github_token}" if github_token.present?
     end
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    response.body if response.is_a?(Net::HTTPSuccess)
+  end
+
+  def extract_github_repo(url)
+    return if url.blank?
+
+    url.split('github.com/').last
+  end
+
+  def github_token
+    ENV['GITHUB_TOKEN'].presence || `gh auth token 2>/dev/null`.strip.presence
+  end
+
+  def filtered_tools
+    tools = favorite_tools? ? Current.user.tools : Tool.all
+
+    tools = tools.where(category: params[:category]) if params[:category].present?
+    tools = tools.where(search_query, *search_values) if params[:query].present?
+
+    tools
+  end
+
+  def favorite_tools?
+    params[:favorites].present? && authenticated?
+  end
+
+  def search_query
+    <<~SQL.squish
+      name ILIKE ? OR
+      description ILIKE ? OR
+      category ILIKE ?
+    SQL
+  end
+
+  def search_values
+    term = "%#{params[:query]}%"
+    [term, term, term]
   end
 end
