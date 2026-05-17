@@ -1,87 +1,121 @@
-require 'net/http'
 require 'json'
+require 'net/http'
 
 namespace :tools do
   desc 'Add a new tool from a GitHub URL (Usage: bin/rails tools:add URL=https://github.com/... [CATEGORY=...])'
   task add: :environment do
-    url = ENV.fetch('URL', nil)
-
-    unless url.present?
-      puts '❌ Error: Please provide a GitHub URL.'
-      puts 'Usage: bin/rails tools:add URL=https://github.com/user/repo [CATEGORY=Utility]'
-      exit 1
-    end
-
-    repo = url.split('github.com/').last&.strip&.gsub(%r{/$}, '')
-
-    unless repo.present?
-      puts '❌ Error: Invalid GitHub URL format.'
-      exit 1
-    end
+    repo = github_repo_from_env
 
     puts "🔍 Fetching data for #{repo}..."
 
+    data = fetch_github_repo_data(repo)
+    tool = build_tool(repo, data)
+
+    if tool.save
+      puts success_message(tool)
+
+      puts '🔄 Updating tool details (README, versions) in the background...'
+      UpdateToolsJob.perform_later
+    else
+      puts '❌ Failed to save tool:'
+      tool.errors.full_messages.each { |message| puts "  - #{message}" }
+    end
+  end
+
+  def github_repo_from_env
+    url = ENV.fetch('URL', nil)
+
+    unless url.present?
+      abort <<~MESSAGE
+        ❌ Error: Please provide a GitHub URL.
+
+        Usage:
+          bin/rails tools:add URL=https://github.com/user/repo [CATEGORY=Utility]
+      MESSAGE
+    end
+
+    repo = url.split('github.com/')
+              .last
+              &.strip
+              &.delete_suffix('/')
+
+    abort '❌ Error: Invalid GitHub URL format.' if repo.blank?
+
+    repo
+  end
+
+  def fetch_github_repo_data(repo)
+    uri = URI("https://api.github.com/repos/#{repo}")
+
+    request = Net::HTTP::Get.new(uri).tap do |req|
+      github_headers.each do |key, value|
+        req[key] = value
+      end
+    end
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    abort "❌ Error: Could not fetch data from GitHub API (#{response.code} #{response.message})" unless response.is_a?(Net::HTTPSuccess)
+
+    JSON.parse(response.body)
+  end
+
+  def github_headers
     headers = {
       'Accept' => 'application/vnd.github.v3+json',
       'User-Agent' => 'Clier-App'
     }
 
-    token = ENV['GITHUB_TOKEN'] || `gh auth token 2>/dev/null`.strip
+    token = github_token
     headers['Authorization'] = "Bearer #{token}" if token.present?
 
-    uri = URI("https://api.github.com/repos/#{repo}")
-    req = Net::HTTP::Get.new(uri)
-    headers.each { |k, v| req[k] = v }
+    headers
+  end
 
-    res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-      http.request(req)
+  def github_token
+    ENV['GITHUB_TOKEN'].presence || `gh auth token 2>/dev/null`.strip.presence
+  end
+
+  def build_tool(repo, data)
+    Tool.find_or_initialize_by(github_url: github_url(repo)).tap do |tool|
+      tool.name = data['name']
+      tool.description = data['description']
+      tool.github_stars = data['stargazers_count']
+      tool.image_url = "https://opengraph.githubassets.com/1/#{repo}"
+
+      tool.website_url = data['homepage'] if data['homepage'].present?
+
+      tool.category = resolved_category(data) if tool.new_record? || ENV['CATEGORY'].present?
+    end
+  end
+
+  def github_url(repo)
+    "https://github.com/#{repo}"
+  end
+
+  def resolved_category(data)
+    explicit_category = ENV.fetch('CATEGORY', nil)
+    return explicit_category if explicit_category.present?
+
+    topics = data['topics'] || []
+    return 'Uncategorized' if topics.empty?
+
+    existing_categories = Tool.distinct
+                              .pluck(:category)
+                              .compact
+
+    matched_category = existing_categories.find do |category|
+      topics.any? { |topic| topic.casecmp?(category) }
     end
 
-    unless res.is_a?(Net::HTTPSuccess)
-      puts "❌ Error: Could not fetch data from GitHub API (#{res.code} #{res.message})"
-      exit 1
-    end
+    matched_category || topics.first.capitalize
+  end
 
-    data = JSON.parse(res.body)
+  def success_message(tool)
+    action = tool.previously_new_record? ? 'added' : 'updated'
 
-    # Determine category
-    category = ENV.fetch('CATEGORY', nil)
-    if category.blank?
-      topics = data['topics'] || []
-
-      # Try to find an existing category that matches one of the topics
-      existing_categories = Tool.pluck(:category).uniq.compact.map(&:downcase)
-
-      matched_topic = topics.find { |topic| existing_categories.include?(topic.downcase) }
-
-      category = if matched_topic
-                   # Find the properly cased version of the category
-                   Tool.where('LOWER(category) = ?', matched_topic.downcase).pick(:category)
-                 elsif topics.any?
-                   # If no match, just use the first topic capitalized
-                   topics.first.capitalize
-                 else
-                   'Uncategorized'
-                 end
-    end
-
-    tool = Tool.find_or_initialize_by(github_url: "https://github.com/#{repo}")
-    tool.name = data['name']
-    tool.description = data['description']
-    tool.category = category if tool.new_record? || ENV['CATEGORY'].present?
-    tool.github_stars = data['stargazers_count']
-    tool.website_url = data['homepage'] if data['homepage'].present?
-    tool.image_url = "https://opengraph.githubassets.com/1/#{repo}"
-
-    if tool.save
-      puts "✅ Successfully #{tool.previously_new_record? ? 'added' : 'updated'} tool: #{tool.name} (Category: #{tool.category})"
-
-      # Run UpdateToolsJob to fetch the README and releases immediately
-      puts '🔄 Updating tool details (README, versions) in the background...'
-      UpdateToolsJob.perform_later
-    else
-      puts '❌ Failed to save tool:'
-      tool.errors.full_messages.each { |msg| puts "  - #{msg}" }
-    end
+    "✅ Successfully #{action} tool: #{tool.name} (Category: #{tool.category})"
   end
 end
